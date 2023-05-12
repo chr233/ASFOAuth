@@ -175,10 +175,10 @@
     <value>旧的插件备份清理失败</value>
   </data>
   <data name="ASFEVersionTips" xml:space="preserve">
-    <value>使用命令 ASFEVERSION / AV 检查插件更新</value>
+    <value>使用命令 ASFOVERSION / ASFOV 检查插件更新</value>
   </data>
   <data name="ASFEUpdateTips" xml:space="preserve">
-    <value>使用命令 ASFEUPDATE / AU 自动更新插件</value>
+    <value>使用命令 ASFOUPDATE / ASFOU 自动更新插件</value>
   </data>
   <data name="ErrorLogTitle" xml:space="preserve">
     <value>ASFBuffBot 遇到错误, 日志如下</value>
@@ -205,7 +205,7 @@
     <value> - 描述: {0}</value>
   </data>
   <data name="UpdateTips" xml:space="preserve">
-    <value>可以使用命令 ASFEUPDATE / AU 自动更新插件</value>
+    <value>可以使用命令 ASFOUPDATE / ASFOU 自动更新插件</value>
   </data>
   <data name="SubLink" xml:space="preserve">
     <value>   - 链接: {0}</value>
@@ -224,8 +224,5 @@
   </data>
   <data name="TwoItem" xml:space="preserve">
     <value>{0}: {1}</value>
-  </data>
-  <data name="Approve" xml:space="preserve">
-    <value>接受</value>
   </data>
 </root>

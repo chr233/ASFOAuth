@@ -142,18 +142,16 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="access"></param>
-    /// <param name="message"></param>
     /// <param name="args"></param>
-    /// <param name="steamId"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    private static async Task<string?> ResponseCommand(Bot bot, EAccess access, string message, string[] args)
+    private static async Task<string?> ResponseCommand(Bot bot, EAccess access, string[] args)
     {
         string cmd = args[0].ToUpperInvariant();
 
-        if (cmd.StartsWith("ABB."))
+        if (cmd.StartsWith("ASFO."))
         {
-            cmd = cmd[4..];
+            cmd = cmd[5..];
         }
         else
         {
@@ -173,22 +171,17 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
             case 1: //不带参数
                 switch (cmd)
                 {
-                    //Core
-                    //case "TEST" when access >= EAccess.Master:
-                    //case "T" when access >= EAccess.Master:
-                    //    return await Core.Command.Test(bot).ConfigureAwait(false);
-
                     //Update
-                    case "ASFBUFFBOT" when access >= EAccess.FamilySharing:
-                    case "ABB" when access >= EAccess.FamilySharing:
+                    case "ASFOAUTH" when access >= EAccess.FamilySharing:
+                    case "ASFO" when access >= EAccess.FamilySharing:
                         return Update.Command.ResponseASFBuffBotVersion();
 
-                    case "ABBVERSION" when access >= EAccess.Operator:
-                    case "ABBV" when access >= EAccess.Operator:
+                    case "ASFOVERSION" when access >= EAccess.Operator:
+                    case "ASFOV" when access >= EAccess.Operator:
                         return await Update.Command.ResponseCheckLatestVersion().ConfigureAwait(false);
 
-                    case "ABBUPDATE" when access >= EAccess.Owner:
-                    case "ABBU" when access >= EAccess.Owner:
+                    case "ASFOUPDATE" when access >= EAccess.Owner:
+                    case "ASFOU" when access >= EAccess.Owner:
                         return await Update.Command.ResponseUpdatePlugin().ConfigureAwait(false);
 
                     default:
@@ -198,12 +191,12 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                 switch (cmd)
                 {
                     //Core
-                    case "TEST" when argLength == 3 && access >= EAccess.Master:
-                    case "T" when argLength == 3 && access >= EAccess.Master:
+                    case "OAUTH" when argLength == 3 && access >= EAccess.Master:
+                    case "O" when argLength == 3 && access >= EAccess.Master:
                         return await Core.Command.Test(args[1], args[2]).ConfigureAwait(false);
 
-                    case "TEST" when argLength == 2 && access >= EAccess.Master:
-                    case "T" when argLength == 2 && access >= EAccess.Master:
+                    case "OAUTH" when argLength == 2 && access >= EAccess.Master:
+                    case "O" when argLength == 2 && access >= EAccess.Master:
                         return await Core.Command.Test(bot, args[1]).ConfigureAwait(false);
 
                     default:
@@ -232,7 +225,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
 
         try
         {
-            return await ResponseCommand(bot, access, message, args).ConfigureAwait(false);
+            return await ResponseCommand(bot, access, args).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

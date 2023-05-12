@@ -70,15 +70,6 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似 接受 的本地化字符串。
-        /// </summary>
-        internal static string Approve {
-            get {
-                return ResourceManager.GetString("Approve", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 当前版本: {0} 的本地化字符串。
         /// </summary>
         internal static string ASFECurrentVersion {
@@ -106,7 +97,7 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似 使用命令 ASFEUPDATE / AU 自动更新插件 的本地化字符串。
+        ///   查找类似 使用命令 ASFOUPDATE / ASFOU 自动更新插件 的本地化字符串。
         /// </summary>
         internal static string ASFEUpdateTips {
             get {
@@ -115,7 +106,7 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似 使用命令 ASFEVERSION / AV 检查插件更新 的本地化字符串。
+        ///   查找类似 使用命令 ASFOVERSION / ASFOV 检查插件更新 的本地化字符串。
         /// </summary>
         internal static string ASFEVersionTips {
             get {
@@ -385,7 +376,7 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似 可以使用命令 ASFEUPDATE / AU 自动更新插件 的本地化字符串。
+        ///   查找类似 可以使用命令 ASFOUPDATE / ASFOU 自动更新插件 的本地化字符串。
         /// </summary>
         internal static string UpdateTips {
             get {

@@ -1,15 +1,15 @@
-# ASFBuffBot
+# ASFOAuth
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/45b50288f8b14ebda915ed89e0382648)](https://www.codacy.com/gh/chr233/ASFBuffBot/dashboard)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFBuffBot/autobuild.yml?logo=github)
-[![License](https://img.shields.io/github/license/chr233/ASFBuffBot?logo=apache)](https://github.com/chr233/ASFBuffBot/blob/master/license)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/45b50288f8b14ebda915ed89e0382648)](https://www.codacy.com/gh/chr233/ASFOAuth/dashboard)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFOAuth/autobuild.yml?logo=github)
+[![License](https://img.shields.io/github/license/chr233/ASFOAuth?logo=apache)](https://github.com/chr233/ASFOAuth/blob/master/license)
 
-[![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFBuffBot?logo=github)](https://github.com/chr233/ASFBuffBot/releases)
-[![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFBuffBot?include_prereleases&label=pre-release&logo=github)](https://github.com/chr233/ASFBuffBot/releases)
-![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFBuffBot?logo=github)
+[![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFOAuth?logo=github)](https://github.com/chr233/ASFOAuth/releases)
+[![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFOAuth?include_prereleases&label=pre-release&logo=github)](https://github.com/chr233/ASFOAuth/releases)
+![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFOAuth?logo=github)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/chr233/ASFBuffBot?logo=github)
-[![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFBuffBot/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFBuffBot)
+![GitHub Repo stars](https://img.shields.io/github/stars/chr233/ASFOAuth?logo=github)
+[![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFOAuth/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFOAuth)
 
 [![Bilibili](https://img.shields.io/badge/bilibili-Chr__-00A2D8.svg?logo=bilibili)](https://space.bilibili.com/5805394)
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
@@ -17,16 +17,19 @@
 [![Steam](https://img.shields.io/badge/steam-donate-1B2838.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=221260487&token=xgqMgL-i)
 [![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
 
-ASFBuffBot 介绍 & 使用指南: [https://keylol.com/t887696-1-1](https://keylol.com/t887696-1-1)
+<!-- ASFOAuth 介绍 & 使用指南: [https://keylol.com/t887696-1-1](https://keylol.com/t887696-1-1) -->
+
+> 警告: 安装后所有拥有 Master 权限的用户都将可以使用机器人账号登录第三方网站, 请谨慎使用
+> 警告: 安装后所有拥有 Master 权限的用户都将可以使用机器人账号登录第三方网站, 请谨慎使用
+> 警告: 安装后所有拥有 Master 权限的用户都将可以使用机器人账号登录第三方网站, 请谨慎使用
 
 ## 安装方式
 
 ### 初次安装 / 手动更新
 
-1. 从 [GitHub Releases](https://github.com/chr233/ASFBuffBot/releases) 下载插件的最新版本
-2. 解压后将 `ASFBuffBot.dll` 丢进 `ArchiSteamFarm` 目录下的 `plugins` 文件夹
+1. 从 [GitHub Releases](https://github.com/chr233/ASFOAuth/releases) 下载插件的最新版本
+2. 解压后将 `ASFOAuth.dll` 丢进 `ArchiSteamFarm` 目录下的 `plugins` 文件夹
 3. 重新启动 `ArchiSteamFarm` , 使用命令 `ABB` 来检查插件是否正常工作
-4. 访问 [buff.163.com](https://buff.163.com) 复制 Cookies, 并使用命令 `UPDATECOOKIES xxx` 更新 Cookies, xxx 为网站的 Cookies
 
 ### 使用命令升级插件
 
@@ -38,10 +41,10 @@ ASFBuffBot 介绍 & 使用指南: [https://keylol.com/t887696-1-1](https://keylo
 
 ### 更新日志
 
-| ASFBuffBot 版本                                                      | 适配 ASF 版本 | 更新说明               |
-| -------------------------------------------------------------------- | :-----------: | ---------------------- |
-| [1.0.4.1](https://github.com/chr233/ASFBuffBot/releases/tag/1.0.4.1) |    5.4.5.2    | 支持多账号, bug 修复   |
-| [1.0.0.0](https://github.com/chr233/ASFBuffBot/releases/tag/1.0.0.0) |    5.4.4.5    | 第一个版本, 单账号模式 |
+| ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明               |
+| ------------------------------------------------------------------ | :-----------: | ---------------------- |
+| [1.0.4.1](https://github.com/chr233/ASFOAuth/releases/tag/1.0.4.1) |    5.4.5.2    | 支持多账号, bug 修复   |
+| [1.0.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.0) |    5.4.4.5    | 第一个版本, 单账号模式 |
 
 ## 插件配置说明
 
@@ -55,8 +58,8 @@ ASF.json
   "CurrentCulture": "...",
   "IPCPassword": "...",
   "...": "...",
-  //ASFBuffBot 配置
-  "ASFBuffBot": {
+  //ASFOAuth 配置
+  "ASFOAuth": {
     "Statistic": true,
     "DisabledCmds": ["foo", "bar"],
     "BuffCheckInterval": 180,
@@ -66,15 +69,15 @@ ASF.json
 }
 ```
 
-| 配置项              | 类型   | 默认值 | 说明                                                                              |
-| ------------------- | ------ | ------ | --------------------------------------------------------------------------------- |
-| `Statistic`         | bool   | `true` | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息                |
-| `DisabledCmds`      | list   | `null` | 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFBuffBot` 中的命令生效 |
-| `BuffCheckInterval` | int    | `180`  | 每一轮 Buff 发货检查的周期, 单位秒, 访问频率过快容易被 ban                        |
-| `BotInterval`       | int    | `30`   | 在一轮发货检查中每个机器人的检查间隔, 单位秒                                      |
-| `CustomUserAgent`   | string | `null` | 自定义 `User-Agent` 用于向 Buff 发送请求                                          |
+| 配置项              | 类型   | 默认值 | 说明                                                                            |
+| ------------------- | ------ | ------ | ------------------------------------------------------------------------------- |
+| `Statistic`         | bool   | `true` | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息              |
+| `DisabledCmds`      | list   | `null` | 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFOAuth` 中的命令生效 |
+| `BuffCheckInterval` | int    | `180`  | 每一轮 Buff 发货检查的周期, 单位秒, 访问频率过快容易被 ban                      |
+| `BotInterval`       | int    | `30`   | 在一轮发货检查中每个机器人的检查间隔, 单位秒                                    |
+| `CustomUserAgent`   | string | `null` | 自定义 `User-Agent` 用于向 Buff 发送请求                                        |
 
-> \*\* `DisabledCmds` 配置说明: 该项配置**不区分大小写**, 仅对 `ASFBuffBot` 中的命令有效
+> \*\* `DisabledCmds` 配置说明: 该项配置**不区分大小写**, 仅对 `ASFOAuth` 中的命令有效
 > 例如配置为 `["foo","BAR"]` , 则代表 `FOO` 和 `BAR` 命令将会被禁用
 > 如果无需禁用任何命令, 请将此项配置为 `null` 或者 `[]`
 > 当某条命令被禁用时, 仍然可以使用 `ABB.xxx` 的形式调用被禁用的命令, 例如 `ABB.UPDATECOOKIES`
@@ -83,11 +86,11 @@ ASF.json
 
 ### 插件更新
 
-| 命令         | 缩写   | 权限            | 说明                                              |
-| ------------ | ------ | --------------- | ------------------------------------------------- |
-| `ASFBUFFBOT` | `ABB`  | `FamilySharing` | 查看 ASFBuffBot 的版本                            |
-| `ABBVERSION` | `ABBV` | `Operator`      | 检查 ASFBuffBot 是否为最新版本                    |
-| `ABBUPDATE`  | `ABBU` | `Owner`         | 自动更新 ASFBuffBot 到最新版本 (需要手动重启 ASF) |
+| 命令         | 缩写   | 权限            | 说明                                            |
+| ------------ | ------ | --------------- | ----------------------------------------------- |
+| `ASFOAuth`   | `ABB`  | `FamilySharing` | 查看 ASFOAuth 的版本                            |
+| `ABBVERSION` | `ABBV` | `Operator`      | 检查 ASFOAuth 是否为最新版本                    |
+| `ABBUPDATE`  | `ABBU` | `Owner`         | 自动更新 ASFOAuth 到最新版本 (需要手动重启 ASF) |
 
 ### 功能指令
 
