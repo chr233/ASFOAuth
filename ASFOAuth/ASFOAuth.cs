@@ -54,8 +54,6 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
 
         Utils.Config = config ?? new();
 
-        StringBuilder warning = new();
-
         //统计
         if (Config.Statistic)
         {
@@ -84,11 +82,9 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
             }
         }
 
-        if (warning.Length > 0)
-        {
-            warning.Insert(0, Environment.NewLine);
-            Utils.Logger.LogGenericWarning(warning.ToString());
-        }
+        Utils.Logger.LogGenericWarning(Static.Line);
+        Utils.Logger.LogGenericWarning(Langs.RiskWarning);
+        Utils.Logger.LogGenericWarning(Static.Line);
 
         return Task.CompletedTask;
     }
@@ -193,11 +189,11 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                     //Core
                     case "OAUTH" when argLength == 3 && access >= EAccess.Master:
                     case "O" when argLength == 3 && access >= EAccess.Master:
-                        return await Core.Command.Test(args[1], args[2]).ConfigureAwait(false);
+                        return await Core.Command.OAuth(args[1], args[2]).ConfigureAwait(false);
 
                     case "OAUTH" when argLength == 2 && access >= EAccess.Master:
                     case "O" when argLength == 2 && access >= EAccess.Master:
-                        return await Core.Command.Test(bot, args[1]).ConfigureAwait(false);
+                        return await Core.Command.OAuth(bot, args[1]).ConfigureAwait(false);
 
                     default:
                         return null;

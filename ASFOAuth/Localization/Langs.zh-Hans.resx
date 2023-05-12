@@ -225,4 +225,7 @@
   <data name="TwoItem" xml:space="preserve">
     <value>{0}: {1}</value>
   </data>
+  <data name="RiskWarning" xml:space="preserve">
+    <value>警告: 安装后所有拥有 Master 权限的用户都将可以使用机器人账号登录第三方网站, 请谨慎使用</value>
+  </data>
 </root>

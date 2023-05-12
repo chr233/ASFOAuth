@@ -225,4 +225,7 @@
   <data name="TwoItem" xml:space="preserve">
     <value>{0}: {1}</value>
   </data>
+  <data name="RiskWarning" xml:space="preserve">
+    <value>Warning: After installation, all users with Master permissions will be able to login into third-party website via robot account, please use with caution</value>
+  </data>
 </root>

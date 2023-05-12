@@ -15,4 +15,10 @@ public sealed record PluginConfig
     /// </summary>
     [JsonProperty(Required = Required.Default)]
     public List<string>? DisabledCmds { get; set; }
+
+    /// <summary>
+    /// 禁用机器人表
+    /// </summary>
+    //[JsonProperty(Required = Required.Default)]
+    //public List<string>? DiabledBots { get; set; }
 }

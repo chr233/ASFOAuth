@@ -313,6 +313,15 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
+        ///   查找类似 警告: 安装后所有拥有 Master 权限的用户都将可以使用机器人账号登录第三方网站, 请谨慎使用 的本地化字符串。
+        /// </summary>
+        internal static string RiskWarning {
+            get {
+                return ResourceManager.GetString("RiskWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似    - 链接: {0} 的本地化字符串。
         /// </summary>
         internal static string SubLink {

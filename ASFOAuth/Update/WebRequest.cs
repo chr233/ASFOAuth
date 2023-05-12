@@ -13,7 +13,7 @@ internal static class WebRequest
     internal static async Task<GitHubReleaseResponse?> GetLatestRelease(bool useMirror = true)
     {
         Uri request = new(
-            useMirror ? "https://hub.chrxw.com/ASFBuffBot/releases/latest" : "https://api.github.com/repos/chr233/ASFBuffBot/releases/latest"
+            useMirror ? "https://hub.chrxw.com/ASFOAuth/releases/latest" : "https://api.github.com/repos/chr233/ASFOAuth/releases/latest"
         );
         var response = await ASF.WebBrowser!.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
 
