@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [zh-Hans,en-Us]
+        language: [zh-Hans, en-US]
 
     runs-on: windows-latest
 
@@ -64,47 +64,67 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.1.0
 
-      - name: Download ASFBuffBot-zh-Hans artifact from windows-latest
+      - name: Download ${{ env.PROJECT_NAME }}-zh-Hans artifact from windows-latest
         uses: actions/download-artifact@v3.0.1
         with:
-          name: ASFBuffBot-zh-Hans.zip
+          name: ${{ env.PROJECT_NAME }}-zh-Hans.zip
           path: out
 
-      - name: Download ASFBuffBot-en-US artifact from windows-latest
+      - name: Download ${{ env.PROJECT_NAME }}-en-US artifact from windows-latest
         uses: actions/download-artifact@v3.0.1
         with:
-          name: ASFBuffBot-en-US.zip
+          name: ${{ env.PROJECT_NAME }}-en-US.zip
           path: out
 
-      # - name: Download ASFBuffBot-ru-RU artifact from windows-latest
+      # - name: Download ${{ env.PROJECT_NAME }}-ru-RU artifact from windows-latest
       #   uses: actions/download-artifact@v3.0.1
       #   with:
-      #     name: ASFBuffBot-ru-RU.zip
+      #     name: ${{ env.PROJECT_NAME }}-ru-RU.zip
       #     path: out
 
-      - name: Create ASFBuffBot GitHub release
+      - name: Create ${{ env.PROJECT_NAME }} GitHub release
         id: github_release
         uses: actions/create-release@v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: ASFBuffBot ${{ github.ref_name }}
+          release_name: ${{ env.PROJECT_NAME }} ${{ github.ref_name }}
           body: |
-            [![ASFBuffBot Release](https://img.shields.io/badge/ASFBuffBot-${{ github.ref_name }}-brightgreen)](https://github.com/chr233/ASFBuffBot/releases/tag/${{ github.ref_name }}) ![Downloads](https://img.shields.io/github/downloads/chr233/ASFBuffBot/${{ github.ref_name }}/total?label=Downloads)
+            ![ASFOAuth Release](https://img.shields.io/badge/ASFOAuth-${{ github.ref_name }}-brightgreen) ![Downloads](https://img.shields.io/github/downloads/chr233/ASFOAuth/${{ github.ref_name }}/total?label=Downloads)
 
-            使用命令 `ABBU` 自动更新插件
-            Use command `ABBU` to update this plugin
+            使用命令 `ASFOU` 自动更新插件
+            Use command `ASFOU` to update this plugin
 
             release created bt github actions
           prerelease: true
 
-      - name: Upload ASFBuffBot-zh-Hans to GitHub release
+      - name: Upload ${{ env.PROJECT_NAME }}-zh-Hans to GitHub release
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.github_release.outputs.upload_url }}
-          asset_path: out/ASFBuffBot-zh-Hans.zip
-          asset_name: ASFBuffBot-zh-Hans.zip
+          asset_path: out/${{ env.PROJECT_NAME }}-zh-Hans.zip
+          asset_name: ${{ env.PROJECT_NAME }}-zh-Hans.zip
           asset_content_type: application/zip
+
+      - name: Upload ${{ env.PROJECT_NAME }}-en-US to GitHub release
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.github_release.outputs.upload_url }}
+          asset_path: out/${{ env.PROJECT_NAME }}-en-US.zip
+          asset_name: ${{ env.PROJECT_NAME }}-en-US.zip
+          asset_content_type: application/zip
+
+      # - name: Upload ${{ env.PROJECT_NAME }}-ru-RU to GitHub release
+      #   uses: actions/upload-release-asset@v1.0.2
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.github_release.outputs.upload_url }}
+      #     asset_path: out/${{ env.PROJECT_NAME }}-ru-RU.zip
+      #     asset_name: ${{ env.PROJECT_NAME }}-ru-RU.zip
+      #     asset_content_type: application/zip
