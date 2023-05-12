@@ -41,10 +41,9 @@
 
 ### 更新日志
 
-| ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明               |
-| ------------------------------------------------------------------ | :-----------: | ---------------------- |
-| [1.0.4.1](https://github.com/chr233/ASFOAuth/releases/tag/1.0.4.1) |    5.4.5.2    | 支持多账号, bug 修复   |
-| [1.0.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.0) |    5.4.4.5    | 第一个版本, 单账号模式 |
+| ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明   |
+| ------------------------------------------------------------------ | :-----------: | ---------- |
+| [1.0.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.0) |    5.4.5.2    | 第一个版本 |
 
 ## 插件配置说明
 
@@ -61,42 +60,33 @@ ASF.json
   //ASFOAuth 配置
   "ASFOAuth": {
     "Statistic": true,
-    "DisabledCmds": ["foo", "bar"],
-    "BuffCheckInterval": 180,
-    "BotInterval": 30,
-    "CustomUserAgent": null
+    "DisabledCmds": ["foo", "bar"]
   }
 }
 ```
 
-| 配置项              | 类型   | 默认值 | 说明                                                                            |
-| ------------------- | ------ | ------ | ------------------------------------------------------------------------------- |
-| `Statistic`         | bool   | `true` | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息              |
-| `DisabledCmds`      | list   | `null` | 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFOAuth` 中的命令生效 |
-| `BuffCheckInterval` | int    | `180`  | 每一轮 Buff 发货检查的周期, 单位秒, 访问频率过快容易被 ban                      |
-| `BotInterval`       | int    | `30`   | 在一轮发货检查中每个机器人的检查间隔, 单位秒                                    |
-| `CustomUserAgent`   | string | `null` | 自定义 `User-Agent` 用于向 Buff 发送请求                                        |
+| 配置项         | 类型 | 默认值 | 说明                                                                            |
+| -------------- | ---- | ------ | ------------------------------------------------------------------------------- |
+| `Statistic`    | bool | `true` | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息              |
+| `DisabledCmds` | list | `null` | 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFOAuth` 中的命令生效 |
 
 > \*\* `DisabledCmds` 配置说明: 该项配置**不区分大小写**, 仅对 `ASFOAuth` 中的命令有效
 > 例如配置为 `["foo","BAR"]` , 则代表 `FOO` 和 `BAR` 命令将会被禁用
 > 如果无需禁用任何命令, 请将此项配置为 `null` 或者 `[]`
-> 当某条命令被禁用时, 仍然可以使用 `ABB.xxx` 的形式调用被禁用的命令, 例如 `ABB.UPDATECOOKIES`
+> 当某条命令被禁用时, 仍然可以使用 `ASFO.xxx` 的形式调用被禁用的命令, 例如 `ASFO.OAUTH`
 
 ## 插件指令说明
 
 ### 插件更新
 
-| 命令         | 缩写   | 权限            | 说明                                            |
-| ------------ | ------ | --------------- | ----------------------------------------------- |
-| `ASFOAuth`   | `ABB`  | `FamilySharing` | 查看 ASFOAuth 的版本                            |
-| `ABBVERSION` | `ABBV` | `Operator`      | 检查 ASFOAuth 是否为最新版本                    |
-| `ABBUPDATE`  | `ABBU` | `Owner`         | 自动更新 ASFOAuth 到最新版本 (需要手动重启 ASF) |
+| 命令          | 缩写    | 权限            | 说明                                            |
+| ------------- | ------- | --------------- | ----------------------------------------------- |
+| `ASFOAuth`    | `ASFO`  | `FamilySharing` | 查看 ASFOAuth 的版本                            |
+| `ASFOVERSION` | `ASFOV` | `Operator`      | 检查 ASFOAuth 是否为最新版本                    |
+| `ASFOUPDATE`  | `ASFOU` | `Owner`         | 自动更新 ASFOAuth 到最新版本 (需要手动重启 ASF) |
 
 ### 功能指令
 
-| 命令                           | 缩写  | 权限     | 说明                                                     |
-| ------------------------------ | ----- | -------- | -------------------------------------------------------- |
-| `VALIDCOOKIES [Bots]`          | `VC`  | `Master` | 手动测试当前设置的 Cookies 是否有效                      |
-| `UPDATECOOKIES cookies`        | `UC`  | `Master` | 手动更新 Cookies, 自动根据 Buff 账号信息绑定到对应机器人 |
-| `UPDATECOOKIESBOT Bot cookies` | `UCB` | `Master` | 手动更新 Cookies, 需要指定要绑定的机器人                 |
-| `COOKIESSTATUS [Bots]`         | `CS`  | `Master` | 查看机器人 Cookies 状态                                  |
+| 命令              | 缩写 | 权限     | 说明                                                                      |
+| ----------------- | ---- | -------- | ------------------------------------------------------------------------- |
+| `OAUTH [Bot] Uri` | `O`  | `Master` | 自动使用机器人身份通过 SteamOpenId 登录第三方网站, 返回跳转回第三方的网址 |
