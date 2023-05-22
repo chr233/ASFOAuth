@@ -19,7 +19,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
     [JsonProperty]
     public static PluginConfig Config => Utils.Config;
 
-    private static Timer? StatisticTimer;
+    private Timer? StatisticTimer;
 
     /// <summary>
     /// ASF启动事件
