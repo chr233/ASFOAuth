@@ -36,8 +36,8 @@
 > 可以使用插件自带的命令自带更新插件
 > ASF 版本升级有可能出现不兼容情况, 如果发现插件无法加载请尝试更新 ASF
 
-- `ABBVERSION` / `ABBV` 检查插件更新
-- `ABBUPDATE` / `ABBU` 自动更新插件到最新版本 (需要手动重启 ASF)
+- `ASFOVERSION` / `ASFOV` 检查插件更新
+- `ASFOUPDATE` / `ASFOU` 自动更新插件到最新版本 (需要手动重启 ASF)
 
 ### 更新日志
 
