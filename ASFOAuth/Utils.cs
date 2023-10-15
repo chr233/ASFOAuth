@@ -15,11 +15,6 @@ internal static class Utils
     internal static PluginConfig Config { get; set; } = new();
 
     /// <summary>
-    /// BuffCookies
-    /// </summary>
-    internal static BotNamesStorage BotNames { get; private set; } = new();
-
-    /// <summary>
     /// 更新已就绪
     /// </summary>
     internal static bool UpdatePadding { get; set; }
@@ -71,16 +66,6 @@ internal static class Utils
     internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0");
 
     /// <summary>
-    /// 获取插件所在路径
-    /// </summary>
-    internal static string MyLocation => Assembly.GetExecutingAssembly().Location;
-
-    /// <summary>
-    /// Steam商店链接
-    /// </summary>
-    internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
-
-    /// <summary>
     /// Steam社区链接
     /// </summary>
     internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
@@ -88,5 +73,5 @@ internal static class Utils
     /// <summary>
     /// 日志
     /// </summary>
-    internal static ArchiLogger Logger => ASF.ArchiLogger;
+    internal static ArchiLogger ASFLogger => ASF.ArchiLogger;
 }

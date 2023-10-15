@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
+using System.Reflection;
 using System.Text;
 
 namespace ASFOAuth;
@@ -15,6 +16,8 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
 {
     public string Name => nameof(ASFOAuth);
     public Version Version => Utils.MyVersion;
+
+    private AdapterBtidge? ASFEBridge = null;
 
     [JsonProperty]
     public static PluginConfig Config => Utils.Config;
@@ -46,7 +49,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                     }
                     catch (Exception ex)
                     {
-                        Utils.Logger.LogGenericException(ex);
+                        Utils.ASFLogger.LogGenericException(ex);
                     }
                 }
             }
@@ -82,9 +85,9 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
             }
         }
 
-        Utils.Logger.LogGenericWarning(Static.Line);
-        Utils.Logger.LogGenericWarning(Langs.RiskWarning);
-        Utils.Logger.LogGenericWarning(Static.Line);
+        Utils.ASFLogger.LogGenericWarning(Static.Line);
+        Utils.ASFLogger.LogGenericWarning(Langs.RiskWarning);
+        Utils.ASFLogger.LogGenericWarning(Static.Line);
 
         return Task.CompletedTask;
     }
@@ -95,41 +98,23 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
     /// <returns></returns>
     public Task OnLoaded()
     {
-        StringBuilder message = new("\n");
-        message.AppendLine(Static.Line);
-        message.AppendLine(Static.Logo);
-        message.AppendLine(Static.Line);
-        message.AppendLine(string.Format(Langs.PluginVer, nameof(ASFOAuth), Utils.MyVersion.ToString()));
-        message.AppendLine(Langs.PluginContact);
-        message.AppendLine(Langs.PluginInfo);
-        message.AppendLine(Static.Line);
-
-        string pluginFolder = Path.GetDirectoryName(Utils.MyLocation) ?? ".";
-        string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFOAuth)}.bak");
-        bool existsBackup = File.Exists(backupPath);
-        if (existsBackup)
+        try
         {
-            try
-            {
-                File.Delete(backupPath);
-                message.AppendLine(Langs.CleanUpOldBackup);
-            }
-            catch (Exception e)
-            {
-                Utils.Logger.LogGenericException(e);
-                message.AppendLine(Langs.CleanUpOldBackupFailed);
-            }
+            var flag = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+            var handler = typeof(ASFOAuth).GetMethod(nameof(ResponseCommand), flag);
+
+            const string pluginName = nameof(ASFOAuth);
+            const string cmdPrefix = "ASFO";
+            const string repoName = "ASFOAuth";
+
+            ASFEBridge = AdapterBtidge.InitAdapter(pluginName, cmdPrefix, repoName, handler);
+            ASF.ArchiLogger.LogGenericDebug(ASFEBridge != null ? "ASFEBridge 注册成功" : "ASFEBridge 注册失败");
         }
-        else
+        catch (Exception ex)
         {
-            message.AppendLine(Langs.ASFEVersionTips);
-            message.AppendLine(Langs.ASFEUpdateTips);
+            ASF.ArchiLogger.LogGenericDebug("ASFEBridge 注册出错");
+            ASF.ArchiLogger.LogGenericException(ex);
         }
-
-        message.AppendLine(Static.Line);
-
-        Utils.Logger.LogGenericInfo(message.ToString());
-
         return Task.CompletedTask;
     }
 
@@ -138,67 +123,39 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="access"></param>
+    /// <param name="cmd"></param>
     /// <param name="args"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    private static async Task<string?> ResponseCommand(Bot bot, EAccess access, string[] args)
+    private static Task<string?>? ResponseCommand(Bot bot, EAccess access, string cmd, string[] args)
     {
-        string cmd = args[0].ToUpperInvariant();
-
-        if (cmd.StartsWith("ASFO."))
-        {
-            cmd = cmd[5..];
-        }
-        else
-        {
-            //跳过禁用命令
-            if (Config.DisabledCmds?.Contains(cmd) == true)
-            {
-                Utils.Logger.LogGenericInfo("Command {0} is disabled!");
-                return null;
-            }
-        }
-
         int argLength = args.Length;
-        switch (argLength)
+        return argLength switch
         {
-            case 0:
-                throw new InvalidOperationException(nameof(args));
-            case 1: //不带参数
-                switch (cmd)
-                {
-                    //Update
-                    case "ASFOAUTH" when access >= EAccess.FamilySharing:
-                    case "ASFO" when access >= EAccess.FamilySharing:
-                        return Update.Command.ResponseASFBuffBotVersion();
+            0 => throw new InvalidOperationException(nameof(args)),
+            1 => cmd switch  //不带参数
+            {
+                //Update
+                "ASFOAUTH" or
+                "ASFO" when access >= EAccess.FamilySharing =>
+                   Task.FromResult(Update.Command.ResponseASFBuffBotVersion()),
 
-                    case "ASFOVERSION" when access >= EAccess.Operator:
-                    case "ASFOV" when access >= EAccess.Operator:
-                        return await Update.Command.ResponseCheckLatestVersion().ConfigureAwait(false);
+                _ => null,
+            },
+            _ => cmd switch //带参数
+            {
+                //Core
+                "OAUTH" or
+                "O" when argLength == 3 && access >= EAccess.Master =>
+                     Core.Command.OAuth(args[1], args[2]),
 
-                    case "ASFOUPDATE" when access >= EAccess.Owner:
-                    case "ASFOU" when access >= EAccess.Owner:
-                        return await Update.Command.ResponseUpdatePlugin().ConfigureAwait(false);
+                "OAUTH" or
+                "O" when argLength == 2 && access >= EAccess.Master =>
+                     Core.Command.OAuth(bot, args[1]),
 
-                    default:
-                        return null;
-                }
-            default: //带参数
-                switch (cmd)
-                {
-                    //Core
-                    case "OAUTH" when argLength == 3 && access >= EAccess.Master:
-                    case "O" when argLength == 3 && access >= EAccess.Master:
-                        return await Core.Command.OAuth(args[1], args[2]).ConfigureAwait(false);
-
-                    case "OAUTH" when argLength == 2 && access >= EAccess.Master:
-                    case "O" when argLength == 2 && access >= EAccess.Master:
-                        return await Core.Command.OAuth(bot, args[1]).ConfigureAwait(false);
-
-                    default:
-                        return null;
-                }
-        }
+                _ => null,
+            },
+        };
     }
 
     /// <summary>
@@ -214,6 +171,11 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
     /// <exception cref="InvalidOperationException"></exception>
     public async Task<string?> OnBotCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId = 0)
     {
+        if (ASFEBridge != null)
+        {
+            return null;
+        }
+
         if (!Enum.IsDefined(access))
         {
             throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
@@ -221,40 +183,32 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
 
         try
         {
-            return await ResponseCommand(bot, access, args).ConfigureAwait(false);
+            var cmd = args[0].ToUpperInvariant();
+
+            if (cmd.StartsWith("ASFO."))
+            {
+                cmd = cmd[5..];
+            }
+
+            var task = ResponseCommand(bot, access, cmd, args);
+            if (task != null)
+            {
+                return await task.ConfigureAwait(false);
+            }
+            else
+            {
+                return null;
+            }
         }
         catch (Exception ex)
         {
-            string version = await bot.Commands.Response(EAccess.Owner, "VERSION").ConfigureAwait(false) ?? "Unknown";
-            var i = version.LastIndexOf('V');
-            if (i >= 0)
-            {
-                version = version[++i..];
-            }
-            string cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
-
-            StringBuilder sb = new();
-            sb.AppendLine(Langs.ErrorLogTitle);
-            sb.AppendLine(Static.Line);
-            sb.AppendLine(string.Format(Langs.ErrorLogOriginMessage, message));
-            sb.AppendLine(string.Format(Langs.ErrorLogAccess, access.ToString()));
-            sb.AppendLine(string.Format(Langs.ErrorLogASFVersion, version));
-            sb.AppendLine(string.Format(Langs.ErrorLogPluginVersion, Utils.MyVersion));
-            sb.AppendLine(Static.Line);
-            sb.AppendLine(cfg);
-            sb.AppendLine(Static.Line);
-            sb.AppendLine(string.Format(Langs.ErrorLogErrorName, ex.GetType()));
-            sb.AppendLine(string.Format(Langs.ErrorLogErrorMessage, ex.Message));
-            sb.AppendLine(ex.StackTrace);
-
             _ = Task.Run(async () =>
             {
                 await Task.Delay(500).ConfigureAwait(false);
-                sb.Insert(0, '\n');
-                Utils.Logger.LogGenericError(sb.ToString());
+                Utils.ASFLogger.LogGenericException(ex);
             }).ConfigureAwait(false);
 
-            return sb.ToString();
+            return ex.StackTrace;
         }
     }
 }
