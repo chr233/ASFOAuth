@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
 using System.Reflection;
-using System.Text;
 
 namespace ASFOAuth;
 
