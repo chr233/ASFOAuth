@@ -61,65 +61,20 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似 当前已经是最新版本, 无需更新插件 的本地化字符串。
+        ///   查找类似 ASFEBridge 注册失败 的本地化字符串。
         /// </summary>
-        internal static string AlreadyLatest {
+        internal static string ASFEnhanceRegisterFailed {
             get {
-                return ResourceManager.GetString("AlreadyLatest", resourceCulture);
+                return ResourceManager.GetString("ASFEnhanceRegisterFailed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 当前版本: {0} 的本地化字符串。
+        ///   查找类似 ASFEBridge 注册成功 的本地化字符串。
         /// </summary>
-        internal static string ASFECurrentVersion {
+        internal static string ASFEnhanceRegisterSuccess {
             get {
-                return ResourceManager.GetString("ASFECurrentVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 在线版本: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ASFEOnlineVersion {
-            get {
-                return ResourceManager.GetString("ASFEOnlineVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 插件版本: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ASFEPluginVersion {
-            get {
-                return ResourceManager.GetString("ASFEPluginVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 使用命令 ASFOUPDATE / ASFOU 自动更新插件 的本地化字符串。
-        /// </summary>
-        internal static string ASFEUpdateTips {
-            get {
-                return ResourceManager.GetString("ASFEUpdateTips", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 使用命令 ASFOVERSION / ASFOV 检查插件更新 的本地化字符串。
-        /// </summary>
-        internal static string ASFEVersionTips {
-            get {
-                return ResourceManager.GetString("ASFEVersionTips", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 附件:  的本地化字符串。
-        /// </summary>
-        internal static string Assert {
-            get {
-                return ResourceManager.GetString("Assert", resourceCulture);
+                return ResourceManager.GetString("ASFEnhanceRegisterSuccess", resourceCulture);
             }
         }
         
@@ -129,24 +84,6 @@ namespace ASFOAuth.Localization {
         internal static string CartEmptyResponse {
             get {
                 return ResourceManager.GetString("CartEmptyResponse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 旧的插件备份已经自动清理 的本地化字符串。
-        /// </summary>
-        internal static string CleanUpOldBackup {
-            get {
-                return ResourceManager.GetString("CleanUpOldBackup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 旧的插件备份清理失败 的本地化字符串。
-        /// </summary>
-        internal static string CleanUpOldBackupFailed {
-            get {
-                return ResourceManager.GetString("CleanUpOldBackupFailed", resourceCulture);
             }
         }
         
@@ -196,74 +133,11 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似  - Access: {0} 的本地化字符串。
+        ///   查找类似 ========================================== 的本地化字符串。
         /// </summary>
-        internal static string ErrorLogAccess {
+        internal static string Line {
             get {
-                return ResourceManager.GetString("ErrorLogAccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - ASF 版本: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ErrorLogASFVersion {
-            get {
-                return ResourceManager.GetString("ErrorLogASFVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 错误消息: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ErrorLogErrorMessage {
-            get {
-                return ResourceManager.GetString("ErrorLogErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 错误类型: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ErrorLogErrorName {
-            get {
-                return ResourceManager.GetString("ErrorLogErrorName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 原始消息: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ErrorLogOriginMessage {
-            get {
-                return ResourceManager.GetString("ErrorLogOriginMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 插件版本: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ErrorLogPluginVersion {
-            get {
-                return ResourceManager.GetString("ErrorLogPluginVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 ASFBuffBot 遇到错误, 日志如下 的本地化字符串。
-        /// </summary>
-        internal static string ErrorLogTitle {
-            get {
-                return ResourceManager.GetString("ErrorLogTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 读取插件发行版信息失败! 的本地化字符串。
-        /// </summary>
-        internal static string GetReleaseInfoFailed {
-            get {
-                return ResourceManager.GetString("GetReleaseInfoFailed", resourceCulture);
+                return ResourceManager.GetString("Line", resourceCulture);
             }
         }
         
@@ -286,7 +160,7 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似 作者 Chr_, 联系方式 chr@chrxw.com 的本地化字符串。
+        ///   查找类似 插件作者: Chr_, 联系方式: chr@chrxw.com 的本地化字符串。
         /// </summary>
         internal static string PluginContact {
             get {
@@ -304,11 +178,11 @@ namespace ASFOAuth.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} 版本 {1} 的本地化字符串。
+        ///   查找类似 推荐安装 ASFEnhance, 支持自动更新插件 的本地化字符串。
         /// </summary>
-        internal static string PluginVer {
+        internal static string PluginStandalongMode {
             get {
-                return ResourceManager.GetString("PluginVer", resourceCulture);
+                return ResourceManager.GetString("PluginStandalongMode", resourceCulture);
             }
         }
         
@@ -318,33 +192,6 @@ namespace ASFOAuth.Localization {
         internal static string RiskWarning {
             get {
                 return ResourceManager.GetString("RiskWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似    - 链接: {0} 的本地化字符串。
-        /// </summary>
-        internal static string SubLink {
-            get {
-                return ResourceManager.GetString("SubLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似    - 名称: {0} 的本地化字符串。
-        /// </summary>
-        internal static string SubName {
-            get {
-                return ResourceManager.GetString("SubName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似    - 尺寸: {0:0.000} KB 的本地化字符串。
-        /// </summary>
-        internal static string SubSize {
-            get {
-                return ResourceManager.GetString("SubSize", resourceCulture);
             }
         }
         
@@ -363,33 +210,6 @@ namespace ASFOAuth.Localization {
         internal static string TwoItem {
             get {
                 return ResourceManager.GetString("TwoItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 插件更新失败, 压缩包内容解析失败 的本地化字符串。
-        /// </summary>
-        internal static string UpdateFiledWithZip {
-            get {
-                return ResourceManager.GetString("UpdateFiledWithZip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 插件更新完成, 重启ASF即可应用, 如果不兼容请更新ASF版本 的本地化字符串。
-        /// </summary>
-        internal static string UpdateSuccess {
-            get {
-                return ResourceManager.GetString("UpdateSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 可以使用命令 ASFOUPDATE / ASFOU 自动更新插件 的本地化字符串。
-        /// </summary>
-        internal static string UpdateTips {
-            get {
-                return ResourceManager.GetString("UpdateTips", resourceCulture);
             }
         }
     }

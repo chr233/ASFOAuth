@@ -30,7 +30,7 @@ internal static partial class WebRequest
             return "OAuth链接无效";
         }
 
-        var request = new Uri(Utils.SteamCommunityURL, "/openid/login?" + string.Join('&', queries));
+        var request = new Uri(SteamCommunityURL, "/openid/login?" + string.Join('&', queries));
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
         var eles = response?.Content?.QuerySelectorAll("#openidForm>input[name][value]");
@@ -50,7 +50,7 @@ internal static partial class WebRequest
             }
         }
 
-        request = new Uri(Utils.SteamCommunityURL, "/openid/login");
+        request = new Uri(SteamCommunityURL, "/openid/login");
         var response2 = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: formData, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
 
         return response2?.FinalUri.ToString() ?? "登录失败";

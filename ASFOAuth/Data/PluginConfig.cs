@@ -5,20 +5,13 @@ namespace ASFOAuth.Data;
 public sealed record PluginConfig
 {
     /// <summary>
+    /// 是否同意使用协议
+    /// </summary>
+    [JsonProperty(Required = Required.DisallowNull)]
+    public bool EULA { get; set; }
+    /// <summary>
     /// 启用统计信息
     /// </summary>
     [JsonProperty(Required = Required.DisallowNull)]
     public bool Statistic { get; set; } = true;
-
-    /// <summary>
-    /// 禁用命令表
-    /// </summary>
-    [JsonProperty(Required = Required.Default)]
-    public List<string>? DisabledCmds { get; set; }
-
-    /// <summary>
-    /// 禁用机器人表
-    /// </summary>
-    //[JsonProperty(Required = Required.Default)]
-    //public List<string>? DiabledBots { get; set; }
 }

@@ -13,10 +13,10 @@ namespace ASFOAuth;
 [Export(typeof(IPlugin))]
 internal sealed class ASFOAuth : IASF, IBotCommand2
 {
-    public string Name => nameof(ASFOAuth);
-    public Version Version => Utils.MyVersion;
+    public string Name => "ASF OAuth";
+    public Version Version => MyVersion;
 
-    private AdapterBtidge? ASFEBridge = null;
+    private bool ASFEBridge;
 
     [JsonProperty]
     public static PluginConfig Config => Utils.Config;
@@ -36,7 +36,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
         {
             foreach ((string configProperty, JToken configValue) in additionalConfigProperties)
             {
-                if (configProperty == nameof(ASFOAuth) && configValue.Type == JTokenType.Object)
+                if (configProperty == "ASFEnhance" && configValue.Type == JTokenType.Object)
                 {
                     try
                     {
@@ -48,7 +48,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                     }
                     catch (Exception ex)
                     {
-                        Utils.ASFLogger.LogGenericException(ex);
+                        ASFLogger.LogGenericException(ex);
                     }
                 }
             }
@@ -71,22 +71,10 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
             );
         }
 
-        //禁用命令
-        if (Config.DisabledCmds == null)
-        {
-            Config.DisabledCmds = new();
-        }
-        else
-        {
-            for (int i = 0; i < Config.DisabledCmds.Count; i++)
-            {
-                Config.DisabledCmds[i] = Config.DisabledCmds[i].ToUpperInvariant();
-            }
-        }
 
-        Utils.ASFLogger.LogGenericWarning(Static.Line);
-        Utils.ASFLogger.LogGenericWarning(Langs.RiskWarning);
-        Utils.ASFLogger.LogGenericWarning(Static.Line);
+        ASFLogger.LogGenericWarning(Langs.Line);
+        ASFLogger.LogGenericWarning(Langs.RiskWarning);
+        ASFLogger.LogGenericWarning(Langs.Line);
 
         return Task.CompletedTask;
     }
@@ -97,25 +85,35 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
     /// <returns></returns>
     public Task OnLoaded()
     {
-        try
-        {
-            var flag = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-            var handler = typeof(ASFOAuth).GetMethod(nameof(ResponseCommand), flag);
+        ASFLogger.LogGenericInfo(Langs.PluginContact);
+        ASFLogger.LogGenericInfo(Langs.PluginInfo);
 
-            const string pluginName = nameof(ASFOAuth);
-            const string cmdPrefix = "ASFO";
-            const string repoName = "ASFOAuth";
+        var flag = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        var handler = typeof(ASFOAuth).GetMethod(nameof(ResponseCommand), flag);
 
-            ASFEBridge = AdapterBtidge.InitAdapter(pluginName, cmdPrefix, repoName, handler);
-            ASF.ArchiLogger.LogGenericDebug(ASFEBridge != null ? "ASFEBridge 注册成功" : "ASFEBridge 注册失败");
-        }
-        catch (Exception ex)
+        const string pluginName = nameof(ASFOAuth);
+        const string cmdPrefix = "ASFO";
+        const string repoName = "ASFOAuth";
+
+        ASFEBridge = AdapterBtidge.InitAdapter(pluginName, cmdPrefix, repoName, handler);
+
+        if (ASFEBridge)
         {
-            ASF.ArchiLogger.LogGenericDebug("ASFEBridge 注册出错");
-            ASF.ArchiLogger.LogGenericException(ex);
+            ASFLogger.LogGenericDebug(Langs.ASFEnhanceRegisterSuccess);
         }
+        else
+        {
+            ASFLogger.LogGenericInfo(Langs.ASFEnhanceRegisterFailed);
+            ASFLogger.LogGenericWarning(Langs.PluginStandalongMode);
+        }
+
         return Task.CompletedTask;
     }
+
+    /// <summary>
+    /// 获取插件信息
+    /// </summary>
+    private static string? PluginInfo => string.Format("{0} {1}", nameof(ASFOAuth), MyVersion);
 
     /// <summary>
     /// 处理命令
@@ -134,10 +132,10 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
             0 => throw new InvalidOperationException(nameof(args)),
             1 => cmd switch  //不带参数
             {
-                //Update
+                //Plugin Info
                 "ASFOAUTH" or
                 "ASFO" when access >= EAccess.FamilySharing =>
-                   Task.FromResult(Update.Command.ResponseASFBuffBotVersion()),
+                   Task.FromResult(PluginInfo),
 
                 _ => null,
             },
@@ -170,7 +168,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
     /// <exception cref="InvalidOperationException"></exception>
     public async Task<string?> OnBotCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId = 0)
     {
-        if (ASFEBridge != null)
+        if (ASFEBridge)
         {
             return null;
         }
@@ -204,7 +202,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
             _ = Task.Run(async () =>
             {
                 await Task.Delay(500).ConfigureAwait(false);
-                Utils.ASFLogger.LogGenericException(ex);
+                ASFLogger.LogGenericException(ex);
             }).ConfigureAwait(false);
 
             return ex.StackTrace;
