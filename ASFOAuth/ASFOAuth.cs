@@ -71,7 +71,6 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
             );
         }
 
-
         ASFLogger.LogGenericWarning(Langs.Line);
         ASFLogger.LogGenericWarning(Langs.RiskWarning);
         ASFLogger.LogGenericWarning(Langs.Line);

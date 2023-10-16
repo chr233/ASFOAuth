@@ -2,6 +2,9 @@ using Newtonsoft.Json;
 
 namespace ASFOAuth.Data;
 
+/// <summary>
+/// 插件配置
+/// </summary>
 public sealed record PluginConfig
 {
     /// <summary>
