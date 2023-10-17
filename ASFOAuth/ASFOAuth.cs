@@ -90,11 +90,11 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
         var flag = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
         var handler = typeof(ASFOAuth).GetMethod(nameof(ResponseCommand), flag);
 
-        const string pluginName = nameof(ASFOAuth);
+        const string pluginId = nameof(ASFOAuth);
         const string cmdPrefix = "ASFO";
         const string repoName = "ASFOAuth";
 
-        ASFEBridge = AdapterBtidge.InitAdapter(pluginName, cmdPrefix, repoName, handler);
+        ASFEBridge = AdapterBtidge.InitAdapter(Name, pluginId, cmdPrefix, repoName, handler);
 
         if (ASFEBridge)
         {
