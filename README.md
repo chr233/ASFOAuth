@@ -29,22 +29,19 @@
 
 1. 从 [GitHub Releases](https://github.com/chr233/ASFOAuth/releases) 下载插件的最新版本
 2. 解压后将 `ASFOAuth.dll` 丢进 `ArchiSteamFarm` 目录下的 `plugins` 文件夹
-3. 重新启动 `ArchiSteamFarm` , 使用命令 `ABB` 来检查插件是否正常工作
+3. 重新启动 `ArchiSteamFarm` , 使用命令 `ASFOAUTH` 或 `ASFO` 来检查插件是否正常工作
 
-### 使用命令升级插件
+### ASFEnhance 联动
 
-> 可以使用插件自带的命令自带更新插件
-> ASF 版本升级有可能出现不兼容情况, 如果发现插件无法加载请尝试更新 ASF
-
-- `ASFOVERSION` / `ASFOV` 检查插件更新
-- `ASFOUPDATE` / `ASFOU` 自动更新插件到最新版本 (需要手动重启 ASF)
+> 推荐搭配 [ASFEnhance](https://github.com/chr233/ASFEnhance) 使用, 可以通过 ASFEnhance 实现插件更新管理和禁用特定命令等功能
 
 ### 更新日志
 
-| ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明   |
-| ------------------------------------------------------------------ | :-----------: | ---------- |
-| [1.0.1.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.1.0) |    5.4.8.3    | ASF -> 5.4.8.3 |
-| [1.0.0.2](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.2) |    5.4.5.2    | 第一个版本 |
+| ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明                         |
+| ------------------------------------------------------------------ | :-----------: | -------------------------------- |
+| [1.1.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.1.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 接入 ASFEnhance |
+| [1.0.1.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.1.0) |    5.4.8.3    | ASF -> 5.4.8.3                   |
+| [1.0.0.2](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.2) |    5.4.5.2    | 第一个版本                       |
 
 ## 插件配置说明
 
@@ -59,32 +56,25 @@ ASF.json
   "IPCPassword": "...",
   "...": "...",
   //ASFOAuth 配置
-  "ASFOAuth": {
-    "Statistic": true,
-    "DisabledCmds": ["foo", "bar"]
+  "ASFEnhance": {
+    "Statistic": true
   }
 }
 ```
 
-| 配置项         | 类型 | 默认值 | 说明                                                                            |
-| -------------- | ---- | ------ | ------------------------------------------------------------------------------- |
-| `Statistic`    | bool | `true` | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息              |
-| `DisabledCmds` | list | `null` | 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFOAuth` 中的命令生效 |
+| 配置项      | 类型 | 默认值 | 说明                                                               |
+| ----------- | ---- | ------ | ------------------------------------------------------------------ |
+| `Statistic` | bool | `true` | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息 |
 
-> \*\* `DisabledCmds` 配置说明: 该项配置**不区分大小写**, 仅对 `ASFOAuth` 中的命令有效
-> 例如配置为 `["foo","BAR"]` , 则代表 `FOO` 和 `BAR` 命令将会被禁用
-> 如果无需禁用任何命令, 请将此项配置为 `null` 或者 `[]`
-> 当某条命令被禁用时, 仍然可以使用 `ASFO.xxx` 的形式调用被禁用的命令, 例如 `ASFO.OAUTH`
+> 当某条命令被禁用时, 仍然可以使用 `ASFO.xxx` 或者 `ASFOAUTH.xxx` 的形式调用被禁用的命令, 例如 `ASFO.OAUTH`
 
 ## 插件指令说明
 
 ### 插件更新
 
-| 命令          | 缩写    | 权限            | 说明                                            |
-| ------------- | ------- | --------------- | ----------------------------------------------- |
-| `ASFOAuth`    | `ASFO`  | `FamilySharing` | 查看 ASFOAuth 的版本                            |
-| `ASFOVERSION` | `ASFOV` | `Operator`      | 检查 ASFOAuth 是否为最新版本                    |
-| `ASFOUPDATE`  | `ASFOU` | `Owner`         | 自动更新 ASFOAuth 到最新版本 (需要手动重启 ASF) |
+| 命令       | 缩写   | 权限            | 说明                 |
+| ---------- | ------ | --------------- | -------------------- |
+| `ASFOAuth` | `ASFO` | `FamilySharing` | 查看 ASFOAuth 的版本 |
 
 ### 功能指令
 
