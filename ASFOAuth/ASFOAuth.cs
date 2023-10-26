@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
 using System.Reflection;
+using System.Text;
 
 namespace ASFOAuth;
 
@@ -18,10 +19,9 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
 
     private bool ASFEBridge;
 
-    [JsonProperty]
     public static PluginConfig Config => Utils.Config;
 
-    private Timer? StatisticTimer;
+    private Timer? StatisticTimer { get; set; }
 
     /// <summary>
     /// ASF启动事件
@@ -56,8 +56,24 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
 
         Utils.Config = config ?? new();
 
+        var warnings = new StringBuilder("\n");
+
+        //使用协议
+        if (!Config.EULA)
+        {
+            warnings.AppendLine(Langs.Line);
+            warnings.AppendLineFormat(Langs.EulaWarning, Name);
+            warnings.AppendLine(Langs.Line);
+        }
+
+        warnings.AppendLine(Langs.Line);
+        warnings.AppendLine(Langs.RiskWarning);
+        warnings.AppendLine(Langs.Line);
+
+        ASFLogger.LogGenericWarning(warnings.ToString());
+
         //统计
-        if (Config.Statistic)
+        if (Config.Statistic && !ASFEBridge)
         {
             Uri request = new("https://asfe.chrxw.com/");
             StatisticTimer = new Timer(
@@ -70,10 +86,6 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                 TimeSpan.FromHours(24)
             );
         }
-
-        ASFLogger.LogGenericWarning(Langs.Line);
-        ASFLogger.LogGenericWarning(Langs.RiskWarning);
-        ASFLogger.LogGenericWarning(Langs.Line);
 
         return Task.CompletedTask;
     }

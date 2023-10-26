@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ASFOAuth.Data;
 using System.Reflection;
+using System.Text;
 
 namespace ASFOAuth;
 
@@ -15,36 +16,24 @@ internal static class Utils
     internal static PluginConfig Config { get; set; } = new();
 
     /// <summary>
-    /// 更新已就绪
-    /// </summary>
-    internal static bool UpdatePadding { get; set; }
-
-    /// <summary>
-    /// 更新标记
-    /// </summary>
-    /// <returns></returns>
-    private static string UpdateFlag()
-    {
-        if (UpdatePadding)
-        {
-            return "*";
-        }
-        else
-        {
-            return "";
-        }
-    }
-
-    /// <summary>
     /// 格式化返回文本
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
     internal static string FormatStaticResponse(string message)
     {
-        string flag = UpdateFlag();
+        return $"<ASF> {message}";
+    }
 
-        return $"<ABB{flag}> {message}";
+    /// <summary>
+    /// 格式化返回文本
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    internal static string FormatStaticResponse(string message, params object?[] args)
+    {
+        return FormatStaticResponse(string.Format(message, args));
     }
 
     /// <summary>
@@ -55,9 +44,24 @@ internal static class Utils
     /// <returns></returns>
     internal static string FormatBotResponse(this Bot bot, string message)
     {
-        string flag = UpdateFlag();
+        return $"<{bot.BotName}> {message}";
+    }
 
-        return $"<{bot.BotName}{flag}> {message}";
+    /// <summary>
+    /// 格式化返回文本
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="message"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    internal static string FormatBotResponse(this Bot bot, string message, params object?[] args)
+    {
+        return bot.FormatBotResponse(string.Format(message, args));
+    }
+
+    internal static StringBuilder AppendLineFormat(this StringBuilder sb, string format, params object?[] args)
+    {
+        return sb.AppendLine(string.Format(format, args));
     }
 
     /// <summary>
