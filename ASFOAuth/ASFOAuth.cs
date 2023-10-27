@@ -146,7 +146,7 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                 //Plugin Info
                 "ASFOAUTH" or
                 "ASFO" when access >= EAccess.FamilySharing =>
-                   Task.FromResult(PluginInfo),
+                    Task.FromResult(PluginInfo),
 
                 _ => null,
             },
@@ -155,11 +155,11 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                 //Core
                 "OAUTH" or
                 "O" when argLength == 3 && access >= EAccess.Master =>
-                     Core.Command.OAuth(args[1], args[2]),
+                    Core.Command.OAuth(args[1], args[2]),
 
                 "OAUTH" or
                 "O" when argLength == 2 && access >= EAccess.Master =>
-                     Core.Command.OAuth(bot, args[1]),
+                    Core.Command.OAuth(bot, args[1]),
 
                 _ => null,
             },
