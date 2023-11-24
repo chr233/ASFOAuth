@@ -13,6 +13,7 @@ internal static partial class WebRequest
     /// Steam OAuth登录
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="url"></param>
     /// <returns></returns>
     internal static async Task<string> LoginViaSteamOAuth(Bot bot, string url)
     {
