@@ -3,21 +3,20 @@ using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Net;
+using System.Text.Json.Serialization;
 
 namespace ASFOAuth.IPC;
 
 public sealed record OAuthRequest
 {
-    [JsonProperty(Required = Required.Always)]
-    [Required]
+    [JsonInclude]
+    [JsonRequired]
     public string? BotName { get; set; }
-    [JsonProperty(Required = Required.Always)]
-    [Required]
+    [JsonInclude]
+    [JsonRequired]
     public string? OAuthUrl { get; set; }
 }
 
