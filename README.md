@@ -39,7 +39,8 @@
 
 | ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明                         |
 | ------------------------------------------------------------------ | :-----------: | -------------------------------- |
-| [1.2.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.1.0.0) |   5.5.0.11    | ASF -> 5.5.0.11                  |
+| [1.3.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.3.0.0) |    6.0.0.3    | ASF -> 6.0.0.3                   |
+| [1.2.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.2.0.0) |   5.5.0.11    | ASF -> 5.5.0.11                  |
 | [1.1.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.1.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 接入 ASFEnhance |
 | [1.0.1.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.1.0) |    5.4.8.3    | ASF -> 5.4.8.3                   |
 | [1.0.0.2](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.2) |    5.4.5.2    | 第一个版本                       |
