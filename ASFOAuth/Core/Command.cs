@@ -24,4 +24,24 @@ internal static class Command
         }
         return await OAuth(bot, url).ConfigureAwait(false);
     }
+    
+    internal static async Task<string?> OpenId(Bot bot, string url)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+        var response = await WebRequest.LoginViaSteamOpenId(bot, url).ConfigureAwait(false);
+        return bot.FormatBotResponse(response);
+    }
+
+    internal static async Task<string?> OpenId(string botName, string url)
+    {
+        var bot = Bot.GetBot(botName);
+        if (bot == null)
+        {
+            return Utils.FormatStaticResponse(string.Format(Strings.BotNotFound, botName));
+        }
+        return await OpenId(bot, url).ConfigureAwait(false);
+    }
 }

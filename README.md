@@ -37,13 +37,14 @@
 
 ### 更新日志
 
-| ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明                         |
-| ------------------------------------------------------------------ | :-----------: | -------------------------------- |
-| [1.3.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.3.0.0) |    6.0.0.3    | ASF -> 6.0.0.3                   |
-| [1.2.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.2.0.0) |   5.5.0.11    | ASF -> 5.5.0.11                  |
-| [1.1.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.1.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 接入 ASFEnhance |
-| [1.0.1.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.1.0) |    5.4.8.3    | ASF -> 5.4.8.3                   |
-| [1.0.0.2](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.2) |    5.4.5.2    | 第一个版本                       |
+| ASFOAuth 版本                                                      | 适配 ASF 版本 | 更新说明                                      |
+|--------------------------------------------------------------------| :-----------: | --------------------------------------------- |
+| [1.3.0.1](https://github.com/chr233/ASFOAuth/releases/tag/1.3.0.0) |    6.0.0.3    | 与 Steam OAuth 和 Steam OpenId 实现正确的交互 |
+| [1.3.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.3.0.0) |    6.0.0.3    | ASF -> 6.0.0.3                                |
+| [1.2.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.2.0.0) |   5.5.0.11    | ASF -> 5.5.0.11                               |
+| [1.1.0.0](https://github.com/chr233/ASFOAuth/releases/tag/1.1.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 接入 ASFEnhance              |
+| [1.0.1.0](https://github.com/chr233/ASFOAuth/releases/tag/1.0.1.0) |    5.4.8.3    | ASF -> 5.4.8.3                                |
+| [1.0.0.2](https://github.com/chr233/ASFOAuth/releases/tag/1.0.0.2) |    5.4.5.2    | 第一个版本                                    |
 
 ## 插件配置说明
 
@@ -82,6 +83,7 @@ ASF.json
 
 ### 功能指令
 
-| 命令              | 缩写 | 权限     | 说明                                                                      |
-| ----------------- | ---- | -------- | ------------------------------------------------------------------------- |
-| `OAUTH [Bot] Uri` | `O`  | `Master` | 自动使用机器人身份通过 SteamOpenId 登录第三方网站, 返回跳转回第三方的网址 |
+| 命令               | 缩写 | 权限     | 说明                                                                         |
+|--------------------|------|----------|------------------------------------------------------------------------------|
+| `OAUTH [Bot] Uri`  | `OA` | `Master` | 自动使用机器人身份通过  SteamOAuth  登录第三方网站 , 返回跳转回第三方的网址  |
+| `OPENID [Bot] Uri` | `OP` | `Master` | 自动使用机器人身份通过  SteamOpenId  登录第三方网站 , 返回跳转回第三方的网址 |
