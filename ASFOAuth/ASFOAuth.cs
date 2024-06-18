@@ -159,8 +159,8 @@ internal sealed class ASFOAuth : IASF, IBotCommand2
                 "OAUTH" or
                 "OA" when argLength == 2 && access >= EAccess.Master =>
                     Core.Command.OAuth(bot, args[1]),
-                
-                "OPENID" or 
+
+                "OPENID" or
                 "OP" when argLength == 3 && access >= EAccess.Master =>
                     Core.Command.OpenId(args[1], args[2]),
 

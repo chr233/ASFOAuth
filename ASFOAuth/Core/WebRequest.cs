@@ -8,7 +8,7 @@ internal static partial class WebRequest
 {
     [GeneratedRegex(@"(?:(openid\.[a-z_.]+)=([^&]+))")]
     private static partial Regex OpenIdMatchQueries();
-    
+
     [GeneratedRegex(@"(?:([a-z_.]+)=([^&]+))")]
     private static partial Regex OAuthMatchQueries();
 
@@ -59,8 +59,8 @@ internal static partial class WebRequest
         var response2 = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: formData, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
 
         return response2?.FinalUri.ToString() ?? "登录失败";
-    } 
-    
+    }
+
     /// <summary>
     /// Steam OAuth登录
     /// </summary>
@@ -69,7 +69,7 @@ internal static partial class WebRequest
     /// <returns></returns>
     internal static async Task<string> LoginViaSteamOAuth(Bot bot, string url)
     {
-        
+
         var regex = OAuthMatchQueries();
         var matches = regex.Matches(url);
 
@@ -91,7 +91,7 @@ internal static partial class WebRequest
         {
             return "网络错误或OAuth链接无效";
         }
-        
+
         var formData = new Dictionary<string, string>();
         foreach (var ele in eles)
         {
@@ -107,10 +107,10 @@ internal static partial class WebRequest
         {
             return "网络错误或OAuth链接无效";
         }
-        
+
         request = new Uri(SteamCommunityURL, "/oauth/auth");
         var response2 = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: formData, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
-        
+
         return response2?.FinalUri.ToString() ?? "登录失败";
     }
 }
