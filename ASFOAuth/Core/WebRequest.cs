@@ -6,9 +6,6 @@ namespace ASFOAuth.Core;
 
 internal static partial class WebRequest
 {
-    [GeneratedRegex(@"(?:(openid\.[a-z_.]+)=([^&]+))")]
-    private static partial Regex OpenIdMatchQueries();
-
     [GeneratedRegex(@"(?:([a-z_.]+)=([^&]+))")]
     private static partial Regex OAuthMatchQueries();
 
@@ -20,8 +17,14 @@ internal static partial class WebRequest
     /// <returns></returns>
     internal static async Task<string> LoginViaSteamOpenId(Bot bot, string url)
     {
+        url = url.Replace("%26", "&");
 
-        var regex = OpenIdMatchQueries();
+        if (!url.Contains("openid"))
+        {
+            return "OpenId链接无效";
+        }
+
+        var regex = OAuthMatchQueries();
         var matches = regex.Matches(url);
 
         var queries = new List<string>();
@@ -35,7 +38,7 @@ internal static partial class WebRequest
             return "OpenId链接无效";
         }
 
-        var request = new Uri(SteamCommunityURL, "/openid/login?" + string.Join('&', queries));
+        var request = new Uri(SteamCommunityURL, "/openid/login?" + string.Join("%26", queries));
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
         var eles = response?.Content?.QuerySelectorAll("#openidForm>input[name][value]");
@@ -69,6 +72,7 @@ internal static partial class WebRequest
     /// <returns></returns>
     internal static async Task<string> LoginViaSteamOAuth(Bot bot, string url)
     {
+        //url = url.Replace("%26", "&");
 
         var regex = OAuthMatchQueries();
         var matches = regex.Matches(url);
